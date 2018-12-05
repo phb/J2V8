@@ -176,7 +176,7 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
     #{
         # base directories for Node.js link libraries
         set (njs_out_target ${nodejs_dir}/out/${config_name}/obj.target)
-        set (njs_out_v8 ${nodejs_dir}/out/${config_name}/obj.target/deps/v8/src)
+        set (njs_out_v8 ${nodejs_dir}/out/${config_name}/obj.target/deps/v8/gypfiles)
         set (njs_out_deps ${nodejs_dir}/out/${config_name}/obj.target/deps)
 
         # Node.js link libraries
@@ -188,7 +188,7 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_out_deps}/gtest/libgtest.a
             ${njs_out_deps}/zlib/libzlib.a
             ${njs_out_deps}/cares/libcares.a
-            ${njs_out_deps}/libnghttp2.a
+            ${njs_out_deps}/nghttp2/libnghttp2.a
 
             # v8 libs
             ${njs_out_v8}/libv8_base.a
