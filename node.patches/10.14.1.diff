@@ -1,0 +1,13 @@
+diff --git i/src/node.h w/src/node.h
+index bb2a9d2e..e39d6500 100644
+--- i/src/node.h
++++ w/src/node.h
+@@ -538,7 +538,7 @@ extern "C" NODE_EXTERN void node_module_register(void* mod);
+ #ifdef NODE_SHARED_MODE
+ # define NODE_CTOR_PREFIX
+ #else
+-# define NODE_CTOR_PREFIX static
++# define NODE_CTOR_PREFIX
+ #endif
+ 
+ #if defined(_MSC_VER)
