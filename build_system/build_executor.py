@@ -199,7 +199,7 @@ def execute_build(params):
     # if we are the build-instigator (not a cross-compile build-agent) we directly run some initial checks & setups for the build
     if (not params.cross_agent):
         print "Checking Node.js builtins integration consistency..."
-        utils.check_node_builtins()
+        # utils.check_node_builtins()
 
         v8_major,v8_minor,v8_build,v8_patch,v8_is_candidate = utils.get_v8_version()
         njs_major,njs_minor,njs_patch,njs_is_release = utils.get_nodejs_version()
