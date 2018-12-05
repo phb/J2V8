@@ -58,7 +58,7 @@ configs = [
             "params": {
                   "target": c.target_linux,
                   "arch": c.arch_x64,
-                  "node_enabled": True,
+                  "node_enabled": False,
             },
       },
       {
@@ -67,7 +67,7 @@ configs = [
                   "target": c.target_linux,
                   "arch": c.arch_x64,
                   "docker": True,
-                  "node_enabled": True,
+                  "node_enabled": False,
             },
       },
       {
@@ -76,7 +76,7 @@ configs = [
                   "target": c.target_linux,
                   "arch": c.arch_x86,
                   "docker": True,
-                  "node_enabled": True,
+                  "node_enabled": False,
             },
       },
       # MACOSX builds
@@ -85,7 +85,7 @@ configs = [
             "params": {
                   "target": c.target_macos,
                   "arch": c.arch_x64,
-                  "node_enabled": True,
+                  "node_enabled": False,
             },
       },
       {
@@ -94,7 +94,7 @@ configs = [
                   "target": c.target_macos,
                   "arch": c.arch_x64,
                   "vagrant": True,
-                  "node_enabled": True,
+                  "node_enabled": False,
             },
       },
       {
