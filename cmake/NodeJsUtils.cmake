@@ -60,6 +60,8 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_extra_lib}/node.lib
             ${njs_extra_lib}/openssl.lib
             ${njs_extra_lib}/zlib.lib
+            ${njs_extra_lib}/zlib.lib
+            ${njs_extra_lib}/nghttp2.lib
 
             # nodejs/$Config
             ${njs_extra}/cctest.lib
@@ -94,6 +96,8 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_out}/libv8_libplatform.a
             ${njs_out}/libv8_nosnapshot.a
             ${njs_out}/libv8_libsampler.a
+            ${njs_out}/libv8_init.a
+            ${njs_out}/libv8_initializers.a
 
             # node libs
             ${njs_out}/libcares.a
@@ -102,6 +106,8 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_out}/libuv.a
             ${njs_out}/libopenssl.a
             ${njs_out}/libzlib.a
+            ${njs_out}/libnghttp2.a
+            
         )
 
         # verify that all required Node.js libs actually exist
@@ -182,6 +188,7 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_out_deps}/gtest/libgtest.a
             ${njs_out_deps}/zlib/libzlib.a
             ${njs_out_deps}/cares/libcares.a
+            ${njs_out_deps}/libnghttp2.a
 
             # v8 libs
             ${njs_out_v8}/libv8_base.a
@@ -189,6 +196,9 @@ function (get_njs_libs nodejs_dir config_name fail_on_missing_libs)
             ${njs_out_v8}/libv8_libplatform.a
             ${njs_out_v8}/libv8_libbase.a
             ${njs_out_v8}/libv8_libsampler.a
+            ${njs_out_v8}/libv8_init.a
+            ${njs_out_v8}/libv8_initializers.a
+
         )
 
         # verify that all required Node.js libs actually exist

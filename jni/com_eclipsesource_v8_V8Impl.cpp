@@ -13,7 +13,6 @@
 #include <iostream>
 #include <v8.h>
 #include <string.h>
-#include <v8-debug.h>
 #include <map>
 #include <cstdlib>
 #include "com_eclipsesource_v8_V8Impl.h"
@@ -459,7 +458,7 @@ JNIEXPORT jlong JNICALL Java_com_eclipsesource_v8_V8__1createIsolate
   runtime->v8 = env->NewGlobalRef(v8);
   runtime->pendingException = NULL;
   HandleScope handle_scope(runtime->isolate);
-  Handle<ObjectTemplate> globalObject = ObjectTemplate::New();
+  Handle<ObjectTemplate> globalObject = ObjectTemplate::New(runtime->isolate);
   if (globalAlias == NULL) {
     Handle<Context> context = Context::New(runtime->isolate, NULL, globalObject);
     runtime->context_.Reset(runtime->isolate, context);
@@ -685,7 +684,7 @@ JNIEXPORT void JNICALL Java_com_eclipsesource_v8_V8__1terminateExecution
 	  return;
 	}
 	Isolate* isolate = getIsolate(env, v8RuntimePtr);
-	V8::TerminateExecution(isolate);
+	isolate->TerminateExecution();
 	return;
 }
 
@@ -1706,7 +1705,7 @@ JNIEXPORT jlongArray JNICALL Java_com_eclipsesource_v8_V8__1initNewV8Function
   MethodDescriptor* md = new MethodDescriptor();
   Local<External> ext = External::New(isolate, md);
   Persistent<External> pext(isolate, ext);
-  isolate->IdleNotification(1000);
+  isolate->IdleNotificationDeadline(1000);
   pext.SetWeak(md, [](v8::WeakCallbackInfo<MethodDescriptor> const& data) {
     MethodDescriptor* md = data.GetParameter();
     jobject v8 = reinterpret_cast<V8Runtime*>(md->v8RuntimePtr)->v8;
@@ -1762,7 +1761,7 @@ JNIEXPORT jlong JNICALL Java_com_eclipsesource_v8_V8__1registerJavaMethod
   }
   Handle<Object> object = Local<Object>::New(isolate, *reinterpret_cast<Persistent<Object>*>(objectHandle));
   Local<String> v8FunctionName = createV8String(env, isolate, functionName);
-  isolate->IdleNotification(1000);
+  isolate->IdleNotificationDeadline(1000);
   MethodDescriptor* md= new MethodDescriptor();
   Local<External> ext =  External::New(isolate, md);
   Persistent<External> pext(isolate, ext);
@@ -1792,7 +1791,7 @@ JNIEXPORT void JNICALL Java_com_eclipsesource_v8_V8__1setPrototype
   Isolate* isolate = SETUP(env, v8RuntimePtr, );
   Handle<Object> object = Local<Object>::New(isolate, *reinterpret_cast<Persistent<Object>*>(objectHandle));
   Handle<Object> prototype = Local<Object>::New(isolate, *reinterpret_cast<Persistent<Object>*>(prototypeHandle));
-  object->SetPrototype(prototype);
+  object->SetPrototype(isolate->GetCurrentContext(), prototype);
 }
 
 JNIEXPORT jboolean JNICALL Java_com_eclipsesource_v8_V8__1equals

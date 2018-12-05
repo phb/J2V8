@@ -151,6 +151,7 @@ set(include_dirs
     ${J2V8_NODEJS_DIR}/src
     ${J2V8_NODEJS_DIR}/deps/v8
     ${J2V8_NODEJS_DIR}/deps/v8/include
+    ${J2V8_NODEJS_DIR}/deps/uv/include
 )
 
 # do not use JAVA_HOME for Java include files for Android
